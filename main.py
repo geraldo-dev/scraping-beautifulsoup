@@ -8,11 +8,26 @@ url = 'https://inglescompensadores.com.br/texto-em-ingles-com-audio-1-mike-tyson
 req = requests.get(url, headers=headers)
 soup = bs(req.content, "html.parser")
 
+completo = []
+
 #taking the title
 title = soup.find('h1')['title']
 
 #filter content by paragraphs
 paragraphs = soup.find_all('p')[2:11]
 
+completo.append(title)
+
 for p in paragraphs:
-    print(p.text)
+    completo.append(p.text)
+
+
+def save_csv(name_file, list_phrases):
+
+    for phrase in list_phrases:
+        new_file = open(f"{name_file}.csv",'a')
+        new_file.write(phrase+'\n')
+        new_file.close()
+
+save_csv('historia', completo)
+print('salvo')
