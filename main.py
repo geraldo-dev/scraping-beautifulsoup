@@ -8,6 +8,11 @@ url = 'https://inglescompensadores.com.br/texto-em-ingles-com-audio-1-mike-tyson
 req = requests.get(url, headers=headers)
 soup = bs(req.content, "html.parser")
 
-titulo = soup.find('h1')['title']
+#taking the title
+title = soup.find('h1')['title']
 
+#filter content by paragraphs
+paragraphs = soup.find_all('p')[2:11]
 
+for p in paragraphs:
+    print(p.text)
